@@ -36,16 +36,43 @@ func (e *ErrorValidation) setFieldName(fieldName string) {
 
 // Error returns an error.
 func (e ErrorValidation) Error() string {
-	validator := string(e.validatorType)
-	if len(e.validatorValue) > 0 {
-		validator += "=" + e.validatorValue
+	validator := e.validatorType
+	errMsgMap := map[ValidatorType]string{
+		ValidatorEq:  "equal",
+		ValidatorNe:  "not equal",
+		ValidatorGte: "greater than or equal",
+		ValidatorGt:  "greater than",
+		ValidatorLt:  "less than",
+		ValidatorLte: "less than or equal",
 	}
 
-	if len(e.fieldName) > 0 {
-		return fmt.Sprintf("Validation error in field \"%v\" of type \"%v\" using validator \"%v\"", e.fieldName, e.fieldValue.Type(), validator)
-	}
+	switch validator {
+	case ValidatorEq, ValidatorGt, ValidatorGte, ValidatorLt, ValidatorLte, ValidatorNe:
+		switch e.fieldValue.Kind() {
+		case reflect.String, reflect.Map, reflect.Slice, reflect.Array:
+			return fmt.Sprintf("%v length must be %v to %v", e.fieldName, errMsgMap[validator], e.validatorValue)
+		default:
+			return fmt.Sprintf("%v must be %v to %v", e.fieldName, errMsgMap[validator], e.validatorValue)
+		}
 
-	return fmt.Sprintf("Validation error in value of type \"%v\" using validator \"%v\"", e.fieldValue.Type(), validator)
+	case ValidatorEmpty, ValidatorNil:
+		if e.validatorValue == "false" {
+			return fmt.Sprintf("%v is required", e.fieldName)
+		}
+		return fmt.Sprintf("%v must be %v", e.fieldName, e.validatorType)
+
+	case ValidatorFormat:
+		return fmt.Sprintf("%v must be in %v format", e.fieldName, e.validatorValue)
+
+	case ValidatorOneOf:
+		return fmt.Sprintf("%v %v is not an allowed value. Must be one of %v", e.fieldName, e.fieldValue, e.validatorValue)
+
+	default:
+		if len(e.fieldName) > 0 {
+			return fmt.Sprintf("Validation error in field \"%v\" of type \"%v\" using validator \"%v\"", e.fieldName, e.fieldValue.Type(), validator)
+		}
+		return fmt.Sprintf("Validation error in value of type \"%v\" using validator \"%v\"", e.fieldValue.Type(), validator)
+	}
 }
 
 // ErrorSyntax occurs when there is a syntax error.
