@@ -16,11 +16,11 @@ For example, **validate** package is useful when unmarshalling YAML or JSON.
 
 1. Use `go get` to download validate package.
    ```
-   go get gopkg.in/dealancer/validate.v2
+   go get github.com/netcapital/validate
    ```
 2. Import validate package into your project.
    ```go
-   import "gopkg.in/dealancer/validate.v2"
+   import "github.com/netcapital/validate"
    ```
 
 

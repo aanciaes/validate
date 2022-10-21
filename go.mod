@@ -1,4 +1,4 @@
-module gopkg.in/dealancer/validate.v2
+module github.com/netcapital/validate
 
 go 1.11
 
