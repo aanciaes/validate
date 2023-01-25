@@ -8,7 +8,7 @@ import (
 	"os"
 	"strings"
 
-	urn "github.com/leodido/go-urn"
+	"github.com/leodido/go-urn"
 )
 
 // FormatType is used for format validator type definitions.
@@ -65,6 +65,7 @@ const (
 	FormatURLEncoded           FormatType = "url_encoded"
 	FormatDir                  FormatType = "dir"
 	FormatPostcode             FormatType = "postcode"
+	FormatWebsite              FormatType = "website"
 )
 
 // formatFunc is an interface for format validator func
@@ -120,6 +121,7 @@ func getFormatTypeMap() map[FormatType]formatFunc {
 		FormatURLEncoded:           formatURLEncoded,
 		FormatDir:                  formatDir,
 		FormatPostcode:             formatPostcode,
+		FormatWebsite:              formatWebsite,
 	}
 }
 
@@ -593,4 +595,8 @@ func formatDir(value string) bool {
 // formatPostcode is the validation function for validating if the current field's value is a valid postcode.
 func formatPostcode(value string) bool {
 	return postcodeRegex.MatchString(value)
+}
+
+func formatWebsite(value string) bool {
+	return websiteRegex.MatchString(value)
 }
