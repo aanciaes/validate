@@ -40,7 +40,7 @@ const (
 	ethAddressLowerRegexString       = `^0x[0-9a-f]{40}$`
 	uRLEncodedRegexString            = `(%[A-Fa-f0-9]{2})`
 	postcodeRegexString              = `^([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z])))) [0-9][A-Za-z]{2})$` // https://stackoverflow.com/questions/164979/regex-for-matching-uk-postcodes/51885364#51885364
-	websiteRegexString               = `^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-zA-Z0-9]+([\-\.]{1}[a-zA-Z0-9]+)*\.[a-zA-Z]{2,6}(:[0-9]{1,5})?([\/#?][^\s]*)?$`
+	websiteRegexString               = `^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-zA-Z0-9]{1,63}([\-\.]{1}[a-zA-Z0-9]{1,63})*\.[a-zA-Z]{2,63}(:[0-9]{1,5})?([\/#?][^\s]{1,2000})?$`
 )
 
 var (

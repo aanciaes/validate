@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="905f5d28-c5c0-4bc4-bf0f-94bd28b52968" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/formats.go" beforeDir="false" afterPath="$PROJECT_DIR$/formats.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/formats_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/formats_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/regexes.go" beforeDir="false" afterPath="$PROJECT_DIR$/regexes.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
