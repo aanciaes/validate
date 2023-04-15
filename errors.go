@@ -62,8 +62,7 @@ func (e ErrorValidation) Error() string {
 		return fmt.Sprintf("%v must be %v", e.fieldName, e.validatorType)
 
 	case ValidatorFormat:
-		return fmt.Sprintf("%v must be in %v format", e.fieldName, e.validatorValue)
-
+		return validatorFormatErrorMessage(e.validatorValue, e.fieldName)
 	case ValidatorOneOf:
 		return fmt.Sprintf("%v %v is not an allowed value. Must be one of %v", e.fieldName, e.fieldValue, e.validatorValue)
 
@@ -118,4 +117,13 @@ func setFieldName(err ErrorField, fieldName string) ErrorField {
 	}
 
 	return err
+}
+
+func validatorFormatErrorMessage(format, fieldName string) string {
+	switch format {
+	case "website":
+		return fmt.Sprintf("Website must start with https:// and follow the required format: https://example.com or https://www.example.com")
+	default:
+		return fmt.Sprintf("%v must be in %v format", fieldName, format)
+	}
 }

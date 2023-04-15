@@ -817,7 +817,7 @@ func getFormatTestGroups() []FormatTestGroup {
 				{"http://foo.bar#com", true},
 				{"http://foobar.com", true},
 				{"https://foobar.com", true},
-				{"foobar.com", true},
+				{"foobar.com", false},
 				{"http://foobar.coffee/", true},
 				{"http://foobar.中文网/", false},
 				{"http://foobar.org/", true},
